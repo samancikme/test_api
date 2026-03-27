@@ -1,7 +1,9 @@
 import express from 'express';
 import multer from 'multer';
-import mammoth from 'mammoth';
-import pdfParse from 'pdf-parse';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pdfParse = require('pdf-parse');
+const mammoth = require('mammoth');
 import Quiz from '../models/Quiz.js';
 import auth from '../middleware/auth.js';
 
