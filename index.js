@@ -47,8 +47,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/quizzes', quizRoutes);
 
 const PORT = process.env.PORT || 5000;
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => console.log(`Server ${PORT} da ishlayapti`));
-}
-
-export default app;
+app.listen(PORT, () => {
+    console.log(`Server ${PORT} portda ishlayapti`);
+});
