@@ -41,9 +41,9 @@ router.delete('/:id', auth, async (req, res) => {
 
 // --- PARSER YORDAMCHI FUNKSIYASI ---
 function parseTextToQuiz(text, filename) {
-    const lines = text.split('\\n').map(l => l.trim()).filter(l => l);
+    const lines = text.split('\n').map(l => l.trim()).filter(l => l);
 
-    let title = filename.replace(/\\.[^/.]+$/, "");
+    let title = filename.replace(/\.[^/.]+$/, "");
     let description = "";
     let level = "Noma'lum";
     let questions = [];
@@ -76,14 +76,14 @@ function parseTextToQuiz(text, filename) {
             inQuestion = true;
         } else if (inQuestion && line.toLowerCase().startsWith('type:')) {
             currentQuestion.type = line.substring(5).trim().toLowerCase();
-        } else if (inQuestion && /^[A-E]\\)/i.test(line)) {
+        } else if (inQuestion && /^[A-E]\)/i.test(line)) {
             // Variant (masalan, A) Toshkent (T) )
             const optLabel = line.substring(0, 1).toUpperCase();
             let optText = line.substring(2).trim();
-            const isCorrect = /[\\(]T[\\)]/i.test(optText) || /[\\(]t[\\)]/i.test(optText);
+            const isCorrect = /\(T\)/i.test(optText) || /\(t\)/i.test(optText);
 
             if (isCorrect) {
-                optText = optText.replace(/[\\(][Tt][\\)]/g, '').trim();
+                optText = optText.replace(/\([Tt]\)/g, '').trim();
             }
 
             const optId = `o${currentQuestion.options.length + 1}`;
